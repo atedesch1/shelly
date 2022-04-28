@@ -12,9 +12,11 @@ void display_prompt(int *prompt_count)
     (*prompt_count)++;
 }
 
-char *read_input()
+void read_input(char **input) // @TODO Use realloc for any sized input
 {
-    char *input = (char *)malloc(MAX_INPUT_LENGTH * sizeof(char));
-    fgets(input, MAX_INPUT_LENGTH, stdin);
-    return input;
+    if (*input == NULL)
+    {
+        *input = (char *)malloc(MAX_INPUT_LENGTH * sizeof(char));    
+    }
+    fgets(*input, MAX_INPUT_LENGTH, stdin);
 }
