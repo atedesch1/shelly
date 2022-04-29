@@ -4,6 +4,9 @@
 #include <string.h>
 #include <stdbool.h>
 
+#ifndef INTERFACE
+#define INTERFACE
+
 #define MAX_INPUT_LENGTH 200
 
 // displays ~> prompt
@@ -14,3 +17,5 @@ void read_input(char **input);
 
 // returns if input is valid
 bool is_valid_input(const char *input);
+
+#endif // !INTERFACE

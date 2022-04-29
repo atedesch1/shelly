@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef PROGRAM_PARSER
+#define PROGRAM_PARSER
+
 #define NUM_FILE_DESCRIPTORS 3
 #define WHITESPACE_TOKEN " \n\r"
 #define PIPE_TOKEN "|"
@@ -33,3 +36,5 @@ int get_num_program_calls(const char *input);
 
 // returns number of program parameters inside a program call string
 int get_num_program_params(const char *program_str);
+
+#endif // !PROGRAM_PARSER
