@@ -12,6 +12,9 @@ int main(int argc, char **argv)
     {
         display_prompt(&prompt_count);
         read_input(&input);
+        if (!is_valid_input(input))
+            continue;
+        free(input);
     }
 
     return 0;

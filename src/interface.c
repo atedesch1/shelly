@@ -14,9 +14,11 @@ void display_prompt(int *prompt_count)
 
 void read_input(char **input) // @TODO Use realloc for any sized input
 {
-    if (*input == NULL)
-    {
-        *input = (char *)malloc(MAX_INPUT_LENGTH * sizeof(char));    
-    }
+    *input = (char *)malloc(MAX_INPUT_LENGTH * sizeof(char));
     fgets(*input, MAX_INPUT_LENGTH, stdin);
+}
+
+bool is_valid_input(const char *input) // @TODO validate input
+{
+    return true;
 }
