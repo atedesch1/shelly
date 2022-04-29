@@ -3,8 +3,9 @@
 
 #include "interface.h"
 #include "program_parser.h"
+#include "executer.h"
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char**envp)
 {
     int prompt_count = 0;
 
@@ -19,6 +20,7 @@ int main(int argc, char **argv)
         if (!is_valid_input(input))
             continue;
         parse_command(input, &program_calls, &fds);
+        execute_command(program_calls, fds);
         free(input);
         free(program_calls);
         free(fds);
