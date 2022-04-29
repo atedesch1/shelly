@@ -14,6 +14,7 @@ struct program_call
 {
     char *program;
     char **params;
+    char **envparams;
 };
 typedef struct program_call program_call;
 
@@ -27,6 +28,8 @@ char **parse_redirects(char **command_string);
 
 // parses a program call string into a program_call
 program_call *parse_program_call(const char *program_str);
+
+void set_null_params(char ***params);
 
 // breaks input into program call strings
 char **break_into_program_strings(const char *input, const int num_program_calls);

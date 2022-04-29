@@ -65,19 +65,20 @@ program_call *parse_program_call(const char *program_str)
     char *program_str_cpy = (char *)malloc((strlen(program_str) + 1) * sizeof(char *));
     strcpy(program_str_cpy, program_str);
 
+    // set envparams to { "", NULL }
+    set_null_params(&(parsed_program->envparams));
+
     char *token = strtok(program_str_cpy, WHITESPACE_TOKEN);
     if (token != NULL)
         parsed_program->program = token;
 
-    token = strtok(NULL, WHITESPACE_TOKEN);
-
     if (num_program_params == 0) // if no params: params = { "", NULL } 
     {
-        parsed_program->params = (char **)malloc(2 * sizeof(char *));
-        parsed_program->params[0] = "";
-        parsed_program->params[1] = NULL; // end
+        set_null_params(&(parsed_program->params));
         return parsed_program;
     }
+
+    token = strtok(NULL, WHITESPACE_TOKEN);
 
     parsed_program->params = (char **)malloc((num_program_params + 1) * sizeof(char *));
 
@@ -90,6 +91,13 @@ program_call *parse_program_call(const char *program_str)
     parsed_program->params[num_program_params] = NULL; // end
 
     return parsed_program;
+}
+
+void set_null_params(char ***params)
+{
+    *params = (char **)malloc(2 * sizeof(char *));
+    (*params)[0] = "";
+    (*params)[1] = NULL; // end
 }
 
 char **break_into_program_strings(const char *input, const int num_program_calls)
