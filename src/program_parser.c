@@ -71,6 +71,14 @@ program_call *parse_program_call(const char *program_str)
 
     token = strtok(NULL, WHITESPACE_TOKEN);
 
+    if (num_program_params == 0) // if no params: params = { "", NULL } 
+    {
+        parsed_program->params = (char **)malloc(2 * sizeof(char *));
+        parsed_program->params[0] = "";
+        parsed_program->params[1] = NULL; // end
+        return parsed_program;
+    }
+
     parsed_program->params = (char **)malloc((num_program_params + 1) * sizeof(char *));
 
     for (int i = 0; i < num_program_params && token != NULL; i++)
