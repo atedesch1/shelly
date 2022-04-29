@@ -23,7 +23,8 @@ void parse_command(const char *input, program_call ***program_calls, char ***fds
 
 // parses redirects
 // removes string containing redirects from command_string
-// returns an array with 3 strings representing file descriptors
+// returns an array with 3 strings representing file descriptors [stdin, stdout, stderrout]
+// if a redirect is not provided returns NULL on position
 char **parse_redirects(char **command_string);
 
 // parses a program call string into a program_call
