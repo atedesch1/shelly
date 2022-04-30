@@ -16,7 +16,14 @@ void execute_command(program_call **program_calls, char **fds)
             {
                 redirect_output(fds[1]);
             }
-            execve((*p)->program, (*p)->params, (*p)->envparams);
+            if (fds[2] != NULL)
+            {
+                redirect_erroutput(fds[2]);
+            }
+            if (execve((*p)->program, (*p)->params, (*p)->envparams) == -1) // execute program
+            {
+                perror("couldn't execute program");
+            }
         }
         else
         {
@@ -44,5 +51,16 @@ void redirect_output(char *output_path)
         perror("couldn't open");
     }
     dup2(fd, STDOUT_FILENO);
+    close(fd);
+}
+
+void redirect_erroutput(char *erroutput_path)
+{
+    int fd = open(erroutput_path, O_WRONLY | O_CREAT, 0777);
+    if (fd == -1)
+    {
+        perror("couldn't open");
+    }
+    dup2(fd, STDERR_FILENO);
     close(fd);
 }

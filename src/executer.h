@@ -20,4 +20,7 @@ void redirect_input(char *input_path);
 // redirects current process stdout to output_path file
 void redirect_output(char *output_path);
 
+// redirects current process stderrout to erroutput_path file
+void redirect_erroutput(char *erroutput_path);
+
 #endif // !EXECUTER
