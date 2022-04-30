@@ -1,4 +1,4 @@
-#include "executer.h"
+#include "executor.h"
 
 void execute_command(program_call **program_calls, char **redirect_paths)
 {

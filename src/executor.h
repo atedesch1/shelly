@@ -8,8 +8,8 @@
 
 #include "program_parser.h"
 
-#ifndef EXECUTER
-#define EXECUTER
+#ifndef EXECUTOR
+#define EXECUTOR
 
 #define RWX_PERMISSION_ALL 0777
 
@@ -25,4 +25,4 @@ void set_output(int def_output, int *fd_output, char *redirect_output_path);
 // makes fd_erroutput point to error output file descriptor
 void set_erroutput(int def_erroutput, int *fd_erroutput, char *redirect_erroutput_path);
 
-#endif // !EXECUTER
+#endif // !EXECUTOR

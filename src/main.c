@@ -1,9 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "interface.h"
 #include "program_parser.h"
-#include "executer.h"
+#include "executor.h"
 
 int main()
 {
