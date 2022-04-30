@@ -19,7 +19,10 @@ struct program_call
 typedef struct program_call program_call;
 
 // parses input string into programs and redirects
-void parse_command(const char *input, program_call ***program_calls, char ***fds);
+void parse_command(const char *input, program_call ***program_calls, char ***redirect_paths);
+
+// allocates redirect path
+void allocate_redirect_path(char **dest, const char *redirect_path);
 
 // parses redirects
 // removes string containing redirects from command_string

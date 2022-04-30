@@ -1,24 +1,24 @@
 #include "executer.h"
 
-void execute_command(program_call **program_calls, char **fds)
+void execute_command(program_call **program_calls, char **redirect_paths)
 {
     bool is_first_program_call = true;
     for (program_call **p = program_calls; *p != NULL; p++)
     {
         if (fork() == 0)
         { // child process
-            if (is_first_program_call && fds[0] != NULL)
+            if (is_first_program_call && redirect_paths[0] != NULL)
             {
-                redirect_input(fds[0]);
+                redirect_input(redirect_paths[0]);
                 is_first_program_call = false;
             }
-            if (p[1] == NULL && fds[1] != NULL) // if last program_call and redirect output is not NULL
+            if (p[1] == NULL && redirect_paths[1] != NULL) // if last program_call and redirect output is not NULL
             {
-                redirect_output(fds[1]);
+                redirect_output(redirect_paths[1]);
             }
-            if (fds[2] != NULL)
+            if (redirect_paths[2] != NULL)
             {
-                redirect_erroutput(fds[2]);
+                redirect_erroutput(redirect_paths[2]);
             }
             if (execve((*p)->program, (*p)->params, (*p)->envparams) == -1) // execute program
             {

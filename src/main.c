@@ -11,7 +11,7 @@ int main(int argc, char **argv, char**envp)
 
     char *input = NULL;
     program_call **program_calls = NULL;
-    char **fds = NULL;
+    char **redirect_paths = NULL;
 
     while (1)
     {
@@ -19,11 +19,11 @@ int main(int argc, char **argv, char**envp)
         read_input(&input);
         if (!is_valid_input(input))
             continue;
-        parse_command(input, &program_calls, &fds);
-        execute_command(program_calls, fds);
+        parse_command(input, &program_calls, &redirect_paths);
+        execute_command(program_calls, redirect_paths);
         free(input);
         free(program_calls);
-        free(fds);
+        free(redirect_paths);
     }
 
     return 0;

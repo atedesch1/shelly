@@ -1,12 +1,12 @@
 #include "program_parser.h"
 #include "string.h"
 
-void parse_command(const char *input, program_call ***program_calls, char ***fds)
+void parse_command(const char *input, program_call ***program_calls, char ***redirect_paths)
 {
     char *command_string = (char *)malloc((strlen(input) + 1) * sizeof(char));
     strcpy(command_string, input);
 
-    *fds = parse_redirects(&command_string);
+    *redirect_paths = parse_redirects(&command_string);
 
     int num_program_calls = get_num_program_calls(command_string);
     char **program_strs = break_into_program_strings(command_string, num_program_calls);
@@ -20,9 +20,15 @@ void parse_command(const char *input, program_call ***program_calls, char ***fds
     (*program_calls)[num_program_calls] = NULL; // end
 }
 
+void allocate_redirect_path(char **dest, const char *redirect_path)
+{
+    *dest = (char *)malloc((strlen(redirect_path) + 1) * sizeof(char));
+    strcpy(*dest, redirect_path);
+}
+
 char **parse_redirects(char **command_string)
 {
-    char **fds = (char **)malloc(NUM_FILE_DESCRIPTORS * sizeof(char *));
+    char **redirect_paths = (char **)malloc(NUM_FILE_DESCRIPTORS * sizeof(char *));
 
     char *command_cpy = (char *)malloc((strlen(*command_string) + 1) * sizeof(char *));
     strcpy(command_cpy, *command_string);
@@ -37,24 +43,21 @@ char **parse_redirects(char **command_string)
         {
             if (strcmp(last_token, "<") == 0)
             {
-                fds[0] = (char *)malloc((strlen(token) + 1) * sizeof(char));
-                strcpy(fds[0], token);
+                allocate_redirect_path(&(redirect_paths[0]), token);
             }
             else if (strcmp(last_token, ">") == 0)
             {
-                fds[1] = (char *)malloc((strlen(token) + 1) * sizeof(char));
-                strcpy(fds[1], token);
+                allocate_redirect_path(&(redirect_paths[1]), token);
             }
             else if (strcmp(last_token, "2>") == 0)
             {
-                fds[2] = (char *)malloc((strlen(token) + 1) * sizeof(char));
-                strcpy(fds[2], token);
+                allocate_redirect_path(&(redirect_paths[2]), token);
             }
         }
         last_token = token;
         token = strtok(NULL, WHITESPACE_TOKEN);
     }
-    return fds;
+    return redirect_paths;
 }
 
 program_call *parse_program_call(const char *program_str)

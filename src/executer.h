@@ -12,7 +12,7 @@
 #define EXECUTER
 
 // executes command
-void execute_command(program_call **program_calls, char **fds);
+void execute_command(program_call **program_calls, char **redirect_paths);
 
 // redirects current process stdin to input_path file
 void redirect_input(char *input_path);
