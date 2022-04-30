@@ -2,6 +2,7 @@
 outDebug
 
 obj
+test
 shelly
 
 *.o
