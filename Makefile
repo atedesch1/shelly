@@ -38,6 +38,7 @@ $(APPNAME): $(OBJ)
 
 # Creates the dependecy rules
 $(DEPDIR)/%.d: $(SRCDIR)/%$(EXT)
+	@mkdir -p $(@D)
 	@$(CPP) $(CFLAGS) $< -MM -MT $(@:$(DEPDIR)/%.d=$(OBJDIR)/%.o) >$@
 
 # Includes all .h files
@@ -45,6 +46,7 @@ $(DEPDIR)/%.d: $(SRCDIR)/%$(EXT)
 
 # Building rule for .o files and its .c/.cpp in combination with all .h
 $(OBJDIR)/%.o: $(SRCDIR)/%$(EXT)
+	@mkdir -p $(@D)
 	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 ################### Cleaning rules for Unix-based OS ###################
@@ -52,6 +54,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%$(EXT)
 .PHONY: clean
 clean:
 	$(RM) $(DELOBJ) $(DEP) $(APPNAME)
+	@rmdir $(OBJDIR) $(DEPDIR) 
 
 # Cleans only all files with the extension .d
 .PHONY: cleandep
