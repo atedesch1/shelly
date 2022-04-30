@@ -16,7 +16,7 @@ int main()
     while (1)
     {
         display_prompt(&prompt_count);
-        read_input(&input);
+        input = read_input();
         if (!is_valid_input(input))
             continue;
         if (is_exit(input))

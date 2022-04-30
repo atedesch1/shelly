@@ -9,13 +9,11 @@
 #ifndef INTERFACE
 #define INTERFACE
 
-#define MAX_INPUT_LENGTH 200
-
 // displays ~> prompt
 void display_prompt(int *prompt_count);
 
-// reads input by modifying input string
-void read_input(char **input);
+// reads input and returns it
+char *read_input();
 
 // returns if input is valid
 bool is_valid_input(const char *input);

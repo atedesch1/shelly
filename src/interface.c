@@ -12,14 +12,20 @@ void display_prompt(int *prompt_count)
     (*prompt_count)++;
 }
 
-void read_input(char **input) // @TODO Use realloc for any sized input
+char *read_input()
 {
-    *input = (char *)malloc(MAX_INPUT_LENGTH * sizeof(char));
-    fgets(*input, MAX_INPUT_LENGTH, stdin);
+    char *input = NULL;
+    size_t line_size = 0;
+    getline(&input, &line_size, stdin);
+    return input;
 }
 
 bool is_valid_input(const char *input) // @TODO validate input
 {
+    char *input_cpy = (char *)malloc((strlen(input) + 1) * sizeof(char));
+    strcpy(input_cpy, input);
+    char *token = strtok(input_cpy, WHITESPACE_TOKEN);
+    if (token == NULL) return false;
     return true;
 }
 
