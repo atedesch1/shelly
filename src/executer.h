@@ -4,6 +4,7 @@
 #include <sys/wait.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "program_parser.h"
 
@@ -12,6 +13,9 @@
 
 // executes command
 void execute_command(program_call **program_calls, char **fds);
+
+// redirects current process stdin to input_path file
+void redirect_input(char *input_path);
 
 // redirects current process stdout to output_path file
 void redirect_output(char *output_path);
