@@ -13,7 +13,7 @@ int main()
     program_call **program_calls = NULL;
     char **redirect_paths = NULL;
 
-    while (1)
+    while (true)
     {
         display_prompt(&prompt_count);
         input = read_input();
@@ -30,5 +30,5 @@ int main()
         free(redirect_paths);
     }
 
-    return 0;
+    return EXIT_SUCCESS;
 }
