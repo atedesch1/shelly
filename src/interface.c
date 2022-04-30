@@ -6,9 +6,9 @@ void display_prompt(int *prompt_count)
     { // Clear screen and display welcome
         const char *CLEAR_SCREEN_ANSI = " \e[1;1H\e[2J";
         write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
-        printf("Hello from shelly :)\n");
+        printf("Hello from \033[0;36mshelly\033[0m\n");
     }
-    printf("~> "); // prompt
+    printf("\033[0;35m~> \033[0m"); // prompt
     (*prompt_count)++;
 }
 
