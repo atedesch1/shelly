@@ -33,7 +33,7 @@ char **parse_redirects(char **command_string)
     char *command_cpy = (char *)malloc((strlen(*command_string) + 1) * sizeof(char *));
     strcpy(command_cpy, *command_string);
 
-    strtok(*command_string, "<>"); // removes redirects from command_string
+    strtok(*command_string, "<>2"); // removes redirects from command_string
 
     char *token = strtok(command_cpy, WHITESPACE_TOKEN);
     char *last_token = NULL;
