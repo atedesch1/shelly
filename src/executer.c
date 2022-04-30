@@ -5,7 +5,14 @@ void execute_command(program_call **program_calls, char **redirect_paths)
     bool is_first_program_call = true;
     for (program_call **p = program_calls; *p != NULL; p++)
     {
-        if (fork() == 0)
+        pid_t pid = fork();
+        if (pid < 0)
+        {
+            perror("couldn't fork process");
+            exit(1);
+        }
+
+        if (pid == 0)
         { // child process
             if (is_first_program_call && redirect_paths[0] != NULL)
             {
@@ -23,10 +30,11 @@ void execute_command(program_call **program_calls, char **redirect_paths)
             if (execve((*p)->program, (*p)->params, (*p)->envparams) == -1) // execute program
             {
                 perror("couldn't execute program");
+                exit(3);
             }
         }
         else
-        {
+        { // shell process
             wait(NULL);
         }
     }
