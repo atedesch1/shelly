@@ -1,7 +1,9 @@
 .vscode
 outDebug
 
+dep
 obj
+
 test
 shelly
 
