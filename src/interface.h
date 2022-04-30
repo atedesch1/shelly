@@ -4,6 +4,8 @@
 #include <string.h>
 #include <stdbool.h>
 
+#include "program_parser.h"
+
 #ifndef INTERFACE
 #define INTERFACE
 
@@ -17,5 +19,8 @@ void read_input(char **input);
 
 // returns if input is valid
 bool is_valid_input(const char *input);
+
+// checks if input was "exit"
+bool is_exit(const char *input);
 
 #endif // !INTERFACE

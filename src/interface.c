@@ -22,3 +22,11 @@ bool is_valid_input(const char *input) // @TODO validate input
 {
     return true;
 }
+
+bool is_exit(const char *input)
+{
+    char *input_cpy = (char *)malloc((strlen(input) + 1) * sizeof(char));
+    strcpy(input_cpy, input);
+    char *token = strtok(input_cpy, WHITESPACE_TOKEN);
+    return strcmp(token, "exit") == 0;
+}

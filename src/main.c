@@ -19,8 +19,12 @@ int main(int argc, char **argv, char**envp)
         read_input(&input);
         if (!is_valid_input(input))
             continue;
+        if (is_exit(input))
+            break;
+
         parse_command(input, &program_calls, &redirect_paths);
         execute_command(program_calls, redirect_paths);
+        
         free(input);
         free(program_calls);
         free(redirect_paths);
