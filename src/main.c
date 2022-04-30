@@ -5,7 +5,7 @@
 #include "program_parser.h"
 #include "executer.h"
 
-int main(int argc, char **argv, char**envp)
+int main()
 {
     int prompt_count = 0;
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv, char**envp)
 
         parse_command(input, &program_calls, &redirect_paths);
         execute_command(program_calls, redirect_paths);
-        
+
         free(input);
         free(program_calls);
         free(redirect_paths);
