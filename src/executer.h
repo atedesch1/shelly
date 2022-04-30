@@ -13,4 +13,7 @@
 // executes command
 void execute_command(program_call **program_calls, char **fds);
 
+// redirects current process stdout to output_path file
+void redirect_output(char *output_path);
+
 #endif // !EXECUTER
