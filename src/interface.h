@@ -9,6 +9,11 @@
 #ifndef INTERFACE
 #define INTERFACE
 
+#define CLEAR_SCREEN_ANSI " \e[1;1H\e[2J"
+
+// clears screen
+void clear_screen();
+
 // displays ~> prompt
 void display_prompt(int *prompt_count);
 
