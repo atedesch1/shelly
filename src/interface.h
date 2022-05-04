@@ -11,11 +11,15 @@
 
 #define CLEAR_SCREEN_ANSI " \e[1;1H\e[2J"
 
+
+// initializes screen
+void init_screen();
+
 // clears screen
 void clear_screen();
 
 // displays ~> prompt
-void display_prompt(int *prompt_count);
+void display_prompt();
 
 // reads input and returns it
 char *read_input();

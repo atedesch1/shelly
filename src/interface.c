@@ -1,19 +1,19 @@
 #include "interface.h"
 
+void init_screen()
+{
+    clear_screen();
+    printf("Hello from \033[0;36mshelly\033[0m\n");
+}
+
 void clear_screen()
 {
     write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
 }
 
-void display_prompt(int *prompt_count)
+void display_prompt()
 {
-    if (*prompt_count == 0)
-    { // Clear screen and display welcome
-        clear_screen();
-        printf("Hello from \033[0;36mshelly\033[0m\n");
-    }
-    printf("\033[0;35m~> \033[0m"); // prompt
-    (*prompt_count)++;
+    printf("\033[0;35m~> \033[0m");
 }
 
 char *read_input()

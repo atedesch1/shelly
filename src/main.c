@@ -4,15 +4,15 @@
 
 int main()
 {
-    int prompt_count = 0;
-
     char *input = NULL;
     program_call **program_calls = NULL;
     char **redirect_paths = NULL;
 
+    init_screen();
+
     while (true)
     {
-        display_prompt(&prompt_count);
+        display_prompt();
         input = read_input();
         if (!is_valid_input(input))
             continue;
