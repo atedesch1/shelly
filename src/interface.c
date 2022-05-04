@@ -3,7 +3,7 @@
 void init_screen()
 {
     clear_screen();
-    printf("Hello from \033[0;36mshelly\033[0m\n");
+    printf(WELCOME_MESSAGE);
 }
 
 void clear_screen()
@@ -11,9 +11,21 @@ void clear_screen()
     write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
 }
 
+char *paint_str(char *str, char *ansi_color, char *ansi_reset)
+{
+    int painted_str_len = 1 + strlen(str) + strlen(ansi_color) + strlen(ansi_reset);
+    char *painted_str = malloc(painted_str_len * sizeof(char));
+    strcpy(painted_str, ansi_color);
+    strcat(painted_str, str);
+    strcat(painted_str, ansi_reset);
+    return painted_str;
+}
+
 void display_prompt()
 {
-    printf("\033[0;35m~> \033[0m");
+    char *prompt = paint_str("~>", MAG, reset);
+    printf("%s ", prompt);
+    free(prompt);
 }
 
 char *read_input()
