@@ -38,17 +38,22 @@ char *read_input()
 
 bool is_valid_input(const char *input) // @TODO validate input
 {
-    char *input_cpy = (char *)malloc((strlen(input) + 1) * sizeof(char));
-    strcpy(input_cpy, input);
-    char *token = strtok(input_cpy, WHITESPACE_TOKEN);
-    if (token == NULL) return false;
-    return true;
+    bool is_valid_input = true;
+    char *input_str = (char *)malloc(sizeof(input));
+    strcpy(input_str, input);
+    char *token = strtok(input_str, WHITESPACE_TOKEN);
+    is_valid_input = token != NULL;
+    free(input_str);
+    return is_valid_input;
 }
 
 bool is_exit(const char *input)
 {
-    char *input_cpy = (char *)malloc((strlen(input) + 1) * sizeof(char));
-    strcpy(input_cpy, input);
-    char *token = strtok(input_cpy, WHITESPACE_TOKEN);
-    return strcmp(token, "exit") == 0;
+    bool is_exit = false;
+    char *input_str = (char *)malloc(sizeof(input));
+    strcpy(input_str, input);
+    char *token = strtok(input_str, WHITESPACE_TOKEN);
+    is_exit = strcmp(token, "exit") == 0;
+    free(input_str);
+    return is_exit;
 }
