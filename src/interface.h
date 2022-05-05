@@ -34,4 +34,7 @@ bool is_valid_input(const char *input);
 // Checks if input was "exit"
 bool is_exit(const char *input);
 
+// Checks if input was "cls"
+bool is_clear_screen(const char *input);
+
 #endif // !INTERFACE

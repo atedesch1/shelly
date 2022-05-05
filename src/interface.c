@@ -57,3 +57,14 @@ bool is_exit(const char *input)
     free(input_str);
     return is_exit;
 }
+
+bool is_clear_screen(const char *input)
+{
+    bool is_clear_screen = false;
+    char *input_str = (char *)malloc(sizeof(input));
+    strcpy(input_str, input);
+    char *token = strtok(input_str, WHITESPACE_TOKEN);
+    is_clear_screen = strcmp(token, "cls") == 0;
+    free(input_str);
+    return is_clear_screen;
+}

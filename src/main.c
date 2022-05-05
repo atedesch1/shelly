@@ -18,6 +18,11 @@ int main()
             continue;
         if (is_exit(input))
             break;
+        if (is_clear_screen(input))
+        {
+            clear_screen();
+            continue;
+        }
 
         parse_command(input, &program_calls, &redirect_paths);
         execute_command(program_calls, redirect_paths);
