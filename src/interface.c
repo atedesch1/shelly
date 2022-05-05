@@ -13,8 +13,8 @@ void clear_screen()
 
 char *paint_str(char *str, char *ansi_color, char *ansi_reset)
 {
-    int painted_str_len = 1 + strlen(str) + strlen(ansi_color) + strlen(ansi_reset);
-    char *painted_str = malloc(painted_str_len * sizeof(char));
+    int painted_str_size = sizeof(str) + sizeof(ansi_color) + sizeof(ansi_reset) - 2 * sizeof(char);
+    char *painted_str = malloc(painted_str_size);
     strcpy(painted_str, ansi_color);
     strcat(painted_str, str);
     strcat(painted_str, ansi_reset);
