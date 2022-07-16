@@ -6,7 +6,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include "program_parser.h"
+#include "program_call.h"
+#include "redirects.h"
 
 #ifndef EXECUTOR
 #define EXECUTOR
@@ -14,7 +15,7 @@
 #define RWX_PERMISSION_ALL 0777
 
 // executes command
-void execute_command(program_call **program_calls, char **redirect_paths);
+void execute_command(program_call **program_calls, redirects *redirects);
 
 // makes fd_input point to input file descriptor
 void set_input(int def_input, int *fd_input, char *redirect_input_path);
