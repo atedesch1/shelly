@@ -28,43 +28,41 @@ void display_prompt()
     free(prompt);
 }
 
-char *read_input()
+void read_input(char **input)
 {
-    char *input = NULL;
     size_t line_size = 0;
-    getline(&input, &line_size, stdin);
-    return input;
+    getline(&(*input), &line_size, stdin);
 }
 
-bool is_valid_input(const char *input) // @TODO validate input
+bool is_empty(const char *input)
 {
-    bool is_valid_input = true;
-    char *input_str = (char *)malloc(sizeof(input));
-    strcpy(input_str, input);
-    char *token = strtok(input_str, WHITESPACE_TOKEN);
-    is_valid_input = token != NULL;
-    free(input_str);
-    return is_valid_input;
+    char *input_copy = strdup(input);
+    
+    char *token = strtok(input_copy, WHITESPACE_TOKEN);
+    bool is_empty = token == NULL;
+    
+    free(input_copy);
+    return is_empty;
 }
 
 bool is_exit(const char *input)
 {
-    bool is_exit = false;
-    char *input_str = (char *)malloc(sizeof(input));
-    strcpy(input_str, input);
-    char *token = strtok(input_str, WHITESPACE_TOKEN);
-    is_exit = strcmp(token, "exit") == 0;
-    free(input_str);
+    char *input_copy = strdup(input);
+
+    char *token = strtok(input_copy, WHITESPACE_TOKEN);
+    bool is_exit = strcmp(token, "exit") == 0;
+
+    free(input_copy);
     return is_exit;
 }
 
 bool is_clear_screen(const char *input)
 {
-    bool is_clear_screen = false;
-    char *input_str = (char *)malloc(sizeof(input));
-    strcpy(input_str, input);
-    char *token = strtok(input_str, WHITESPACE_TOKEN);
-    is_clear_screen = strcmp(token, "cls") == 0;
-    free(input_str);
+    char *input_copy = strdup(input);
+    
+    char *token = strtok(input_copy, WHITESPACE_TOKEN);
+    bool is_clear_screen = strcmp(token, "cls") == 0;
+    
+    free(input_copy);
     return is_clear_screen;
 }

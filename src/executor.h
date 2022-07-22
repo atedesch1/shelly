@@ -6,15 +6,15 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include "program_parser.h"
+#include "job.h"
 
 #ifndef EXECUTOR
 #define EXECUTOR
 
 #define RWX_PERMISSION_ALL 0777
 
-// executes command
-void execute_command(program_call **program_calls, char **redirect_paths);
+// executes job
+void execute_job(job *job);
 
 // makes fd_input point to input file descriptor
 void set_input(int def_input, int *fd_input, char *redirect_input_path);

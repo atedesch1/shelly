@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 #include "ansi_colors.h"
-#include "program_parser.h"
+#include "parser.h"
 
 #ifndef INTERFACE
 #define INTERFACE
@@ -25,16 +25,17 @@ char *paint_str(char *str, char *ansi_color, char *ansi_reset);
 // Displays prompt
 void display_prompt();
 
-// Reads input from stdin and returns it
-char *read_input();
+// Reads input from stdin
+void read_input(char **input);
 
-// Returns if input is valid
-bool is_valid_input(const char *input);
+// Checks if input is empty
+bool is_empty(const char *input);
 
-// Checks if input was "exit"
+// Checks if input is "exit"
 bool is_exit(const char *input);
 
-// Checks if input was "cls"
+// Checks if input is "cls"
 bool is_clear_screen(const char *input);
+
 
 #endif // !INTERFACE
