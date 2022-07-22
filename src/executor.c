@@ -1,6 +1,6 @@
 #include "executor.h"
 
-void execute_command(program_call **program_calls, redirects *redirects)
+void execute_job(job *job)
 {
     pid_t child_pid;
 
@@ -14,24 +14,24 @@ void execute_command(program_call **program_calls, redirects *redirects)
     int fd_erroutput;
 
     // sets error output for any process
-    set_erroutput(def_erroutput, &fd_erroutput, redirects->err_output);
+    set_erroutput(def_erroutput, &fd_erroutput, job->io->err_output);
     // redirect error output
     dup2(fd_erroutput, STDERR_FILENO);
     close(fd_erroutput);
 
     // sets input for first process
-    set_input(def_input, &fd_input, redirects->input);
+    set_input(def_input, &fd_input, job->io->input);
 
-    for (program_call **p = program_calls; *p != NULL; p++)
+    for (process *p = job->head_process; p != NULL; p = p->next)
     {
         // redirect input
         dup2(fd_input, STDIN_FILENO);
         close(fd_input);
 
-        if (p[1] == NULL)
+        if (p->next == NULL)
         { // last process
             // sets output for last process
-            set_output(def_output, &fd_output, redirects->err_output);
+            set_output(def_output, &fd_output, job->io->output);
         }
         else
         {
@@ -58,7 +58,7 @@ void execute_command(program_call **program_calls, redirects *redirects)
 
         if (child_pid == 0)
         { // child process
-            if (execve((*p)->program, (*p)->argv, (*p)->envp) == -1)
+            if (execve(p->program, p->argv, p->envp) == -1)
             {
                 perror("couldn't execute program");
                 exit(3);

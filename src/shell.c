@@ -8,8 +8,7 @@ void init_shell()
 int run_shell()
 {
     char *input = NULL;
-    program_call **program_calls = NULL;
-    redirects *redirects = NULL;
+    job *job = NULL;
 
     init_shell();
 
@@ -18,6 +17,11 @@ int run_shell()
         display_prompt();
 
         read_input(&input);
+
+        if (is_empty(input))
+        {
+            continue;
+        }
 
         if (is_exit(input))
         {
@@ -29,20 +33,20 @@ int run_shell()
             clear_screen();
             continue;
         }
+        
+        error *err = parse_input(input, &job);
 
-        int err = parse_input(input, &program_calls, &redirects);
-
-        if (err != 0)
+        if (err != NULL)
         {
-            printf("err: %d\n", err);
+            print_error(err);
+            free_error(&err);
             continue;
         }
 
-        execute_command(program_calls, redirects);
+        execute_job(job);
 
         free(input);
-        // free program_calls
-        // free redirects
+        free_job(&job);
     }
 
     return EXIT_SUCCESS;

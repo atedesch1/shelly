@@ -3,29 +3,27 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "program_call.h"
-#include "redirects.h"
+#include "error.h"
+#include "job.h"
 
 #ifndef PARSER_HEADER
 #define PARSER_HEADER
 
-#define END_STR_CHAR '\0'
-#define SPACE_CHAR ' '
 #define WHITESPACE_TOKEN " \n\r"
 #define PIPE_TOKEN "|"
 #define INPUT_REDIRECT_TOKEN "<"
 #define OUTPUT_REDIRECT_TOKEN ">"
 #define ERR_OUTPUT_REDIRECT_TOKEN "2>"
 
-int parse_input(const char *input, program_call ***program_calls, redirects **redirects);
+error *parse_input(const char *input, job **job);
 
 void tokenize_input(const char *input, char ***tokens);
 
-int validate_input(const char **tokens);
+error *validate_input(const char **tokens);
 
-void parse_programs(const char **tokens, program_call ***program_calls);
+void parse_programs(const char **tokens, job **job);
 
-void parse_redirects(const char **tokens, redirects **redirects);
+void parse_redirects(const char **tokens, job **job);
 
 bool is_redirect_token(const char *token);
 

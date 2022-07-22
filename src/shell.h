@@ -2,8 +2,8 @@
 #include "parser.h"
 #include "executor.h"
 
-#include "program_call.h"
-#include "redirects.h"
+#include "job.h"
+#include "error.h"
 
 #ifndef SHELL_HEADER
 #define SHELL_HEADER

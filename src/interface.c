@@ -34,12 +34,22 @@ void read_input(char **input)
     getline(&(*input), &line_size, stdin);
 }
 
+bool is_empty(const char *input)
+{
+    char *input_copy = strdup(input);
+    
+    char *token = strtok(input_copy, WHITESPACE_TOKEN);
+    bool is_empty = token == NULL;
+    
+    free(input_copy);
+    return is_empty;
+}
+
 bool is_exit(const char *input)
 {
-    char *input_copy = (char *) malloc(sizeof(input));
-    strcpy(input_copy, input);
+    char *input_copy = strdup(input);
 
-    char *token = strtok(input_copy, " ");
+    char *token = strtok(input_copy, WHITESPACE_TOKEN);
     bool is_exit = strcmp(token, "exit") == 0;
 
     free(input_copy);
@@ -48,10 +58,9 @@ bool is_exit(const char *input)
 
 bool is_clear_screen(const char *input)
 {
-    char *input_copy = (char *) malloc(sizeof(input));
-    strcpy(input_copy, input);
-
-    char *token = strtok(input_copy, " ");
+    char *input_copy = strdup(input);
+    
+    char *token = strtok(input_copy, WHITESPACE_TOKEN);
     bool is_clear_screen = strcmp(token, "cls") == 0;
     
     free(input_copy);
